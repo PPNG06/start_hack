@@ -1,0 +1,23 @@
+.center{
+  text-align:center;
+}
+.image{
+  margin:auto;
+  display:flex;
+  justify-content: center;
+}
+.image img{
+  height:auto;
+  width:20%;
+  border-radius:50%;
+}
+.top{
+  margin-top:5%;
+}
+
+.text{
+  color:black;
+}
+h6{
+  color:red;
+}
