@@ -17,7 +17,7 @@ class InstitutionForm(forms.ModelForm):
 class StudentForm(forms.ModelForm):
     class Meta():
         model = Student
-        fields = ('student_first_name','student_last_name')
+        fields = ('student_first_name','student_last_name', 'student_email','wallet_id')
 
 class FileForm(forms.Form):
     document_name = forms.CharField(label="Document name ",max_length=200)

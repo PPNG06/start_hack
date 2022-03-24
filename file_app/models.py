@@ -15,10 +15,11 @@ class Institution(models.Model):
 class Student(models.Model):
 
     user = models.OneToOneField(User,on_delete=models.CASCADE,blank=True,null=True)
-
+    student_email = models.CharField(blank=True,null=True,max_length=1000)
     student_id = models.IntegerField(blank=True, null=True)
     student_first_name = models.CharField(max_length=100,blank=True,null=True)
     student_last_name = models.CharField(max_length=100,blank=True,null=True)
+    wallet_id = models.CharField(blank=True,null=True,max_length=1000)
     def __str__(self):
         return str(self.student_first_name)+" "+str(self.student_last_name)
 

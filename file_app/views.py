@@ -30,12 +30,12 @@ def institution_sign_up(request):
 
             institution = institution_form.save(commit=False)
             institution.user = user
-            institution.institution_id = Institution.objects.count()+1
+            institution.institution_id = Institution.objects.count()+1001
             institution.save()
 
             registered = True
 
-            return render(request,'institution_login.html',)
+            return reverse('institution_login')
         else:
             return render(request,'institution_sign_up.html',{'user_form':user_form,'institution_form':institution_form})
     else:
@@ -52,7 +52,7 @@ def institution_login(request):
         if user:
             if user.is_active:
                 login(request,user)
-                return HttpResponseRedirect(reverse('upload'))
+                return HttpResponseRedirect(reverse('institution_profile'))
             else:
                 return render(request,'institution_login.html',{"err_message":"Invalid login. Please try again"})
         else:
@@ -127,8 +127,7 @@ def upload_view(request):
                 Document.objects.get_or_create(institution = Institution.objects.get(user=request.user), document_name = form.cleaned_data['document_name'],student=student, document_link=request.POST['cid'])
                 return render(request,'success.html',{'document':Document.objects.get(institution = Institution.objects.get(user=request.user), document_name = form.cleaned_data['document_name'],student=student, document_link=request.POST['cid']),'student':student})
             else:
-                print("not valid")
-                print(request.POST)
+                return render(request,'upload.html', {'form': form,'institution':Institution.objects.get(user=request.user),'err_message':'Invalid receipt id'})
         # if a GET (or any other method) we'll create a blank form
         else:
             form = FileForm()
@@ -143,3 +142,10 @@ def student_profile(request):
         return render(request,"student_profile.html",{'student':Student.objects.get(user=request.user)})
     except Student.DoesNotExist:
         return HttpResponseRedirect(reverse('student_login'))
+
+@login_required(login_url="/institution/login")
+def institution_profile(request):
+    try:
+        return render(request,"institution_profile.html",{'institution':Institution.objects.get(user=request.user)})
+    except Institution.DoesNotExist:
+        return HttpResponseRedirect(reverse('institution_login'))
