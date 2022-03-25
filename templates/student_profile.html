@@ -48,7 +48,8 @@
       <div class="jumbotron">
         <br>
         {%for doc in student.document_set.all%}
-        <h5>{{doc}} ({{doc.institution}})</h5>
+        <a href="{{doc.document_link}}"><h5>{{doc}} ({{doc.institution}})</h5></a>
+        <p class="small">Document hash: {{doc.document_hash_value}}</p>
         {%empty%}
         <h5>No records yet</h5>
         {%endfor%}
