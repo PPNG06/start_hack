@@ -35,7 +35,7 @@ def institution_sign_up(request):
 
             registered = True
 
-            return reverse('institution_login')
+            return HttpResponseRedirect(reverse('institution_login'))
         else:
             return render(request,'institution_sign_up.html',{'user_form':user_form,'institution_form':institution_form})
     else:
@@ -106,8 +106,19 @@ def student_login(request):
         return render(request,'student_login.html',)
 
 def certificate_check(request):
-    # maybe insert sth here
-    return render(request,'certificate_check.html')
+    if request.method == "POST":
+        issuer_wallet_id = request.POST['issuerId']
+        doc_link = request.POST['link']
+        print(issuer_wallet_id)
+        institution = Institution.objects.filter(wallet_id = "0x"+issuer_wallet_id).first()
+        if institution != None:
+            #successful
+            return render(request,'search_success.html',{'institution':institution,'document_link':doc_link,})
+        else:
+            #not found
+            return render(request,'certificate_check.html',{'err_message':'There is no verified institution that issued this certificate.'})
+    else:
+        return render(request,'certificate_check.html')
 
 @login_required(login_url="/institution/login")
 def institution_logout(request):
@@ -128,7 +139,7 @@ def upload_view(request):
             # check whether it's valid:
             if form.is_valid() and Student.objects.filter(student_id=request.POST['student_id']).first()!= None:
                 student = Student.objects.get(student_id=request.POST['student_id'])
-                Document.objects.get_or_create(institution = Institution.objects.get(user=request.user), document_name = form.cleaned_data['document_name'],student=student, document_link=request.POST['cid'])
+                Document.objects.get_or_create(institution = Institution.objects.get(user=request.user), document_hash_value = request.POST['hash_value'], document_name = form.cleaned_data['document_name'],student=student, document_link=request.POST['cid'])
                 return render(request,'success.html',{'document':Document.objects.get(institution = Institution.objects.get(user=request.user), document_name = form.cleaned_data['document_name'],student=student, document_link=request.POST['cid']),'student':student})
             else:
                 return render(request,'upload.html', {'form': form,'institution':Institution.objects.get(user=request.user),'err_message':'Invalid receipt id'})

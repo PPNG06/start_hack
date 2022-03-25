@@ -24,7 +24,7 @@
     <ul class="navbar-nav mr-auto">
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <a href="{%url 'institution_logout'%}"><button type="button" class="btn btn-danger" name="button">Logout</button></a>
+      <a href="{%url 'home'%}"><button type="button" class="btn btn-primary" name="button">Home</button></a>
     </form>
   </div>
 </nav>
@@ -33,7 +33,10 @@
       <br>
       <br>
       <div class="jumbotron">
-        <h5>Zertifikat checken:</h5>
+        <h3>Check certificate:</h3>
+        <h5 style="color:red;">{{err_message}}</h5>
+        <br>
+
         <div class="check">
             <p>Provide the hash of a certificate to check whether it is verified and who was the original issuer.</p>
             <div class="input-group">
@@ -44,6 +47,7 @@
       </div>
 
     </div>
+    {%csrf_token%}
     <script type="module" crossorigin src="{%static 'most.js'%}"></script>
   </body>
 </html>

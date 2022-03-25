@@ -22,6 +22,9 @@
         <a style="font-size:0.6em;" class="nav-link" href="{%url 'presentation'%}">What is Switch Learning?</a>
       </li>
     </ul>
+    <form style="margin-right:1%;" class="form-inline my-2 my-lg-0">
+      <a href="{%url 'home'%}"><button type="button" class="btn btn-primary" name="button">Home</button></a>
+    </form>
     <form class="form-inline my-2 my-lg-0">
       <a href="{%url 'institution_login'%}"><button type="button" class="btn btn-primary" name="button">Login</button></a>
     </form>
@@ -34,7 +37,7 @@
         <h1>Sign up as an institution</h1>
         <h6 style="color:red;">{{err_message}}</h6>
         <form enctype="multipart/form-data" method="post">
-          {%csrf_token%}
+          {% csrf_token %}
           <div class="form-group">
           <label for="id_username">Username (or school name):</label>
           <input required class="form-control" type="text" name="username" placeholder="Your Institute's username" maxlength="150" required="" id="id_username">

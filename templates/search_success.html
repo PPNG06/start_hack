@@ -23,28 +23,28 @@
         <a style="font-size:0.6em;" class="nav-link" href="{%url 'presentation'%}">What is Switch Learning?</a>
       </li>
     </ul>
+    <form style="margin-right:1%;" class="form-inline my-2 my-lg-0">
+      <a href="{%url 'home'%}"><button type="button" class="btn btn-primary" name="button">Home</button></a>
+    </form>
   </div>
 </nav>
-
-<div class="container" style="margin-top:5%;">
-<div class="jumbotron">
-<h1 style="text-align:center;font-family: 'Patua One', cursive; margin-top:5%; font-size:5em;">I am</h1>
-<br>
-<br>
-<hr>
-<br>
-<div class="row">
-  <div class="col-sm" style="display:flex;justify-content:center;">
-    <a class="margin:auto;" href="{%url 'institution_login'%}"><button type="button" class="btn btn-block btn-lg btn-outline-primary" name="button">An Institution</button></a>
+<div class="container">
+  <br>
+  <br>
+  <div class="jumbotron">
+    <div class="image" style="display:flex;justify-content:center;">
+      <img style="width:30%;" src="http://assets.stickpng.com/images/5aa78e207603fc558cffbf19.png" alt="">
+    </div>
+    <br>
+    <h3 style="color:green;">This hash exists and corresponds to a certificate issued by a verified institute!</h3>
+    <br>
+    <hr>
+    <br>
+    <h4>More information on the document:</h4>
+    <br>
+    <h5 style="color:black;">Institution name: {{institution}}</h5>
+    <h5 style="color:black;">Document view: <a href="{{document_link}}">Click here</a></h5>
   </div>
-  <div class="col-sm" style="display:flex;justify-content:center;">
-    <a class="margin:auto;" href="{%url 'certificate_check'%}"><button type="button" class="btn btn-block btn-lg btn-outline-primary" name="button">A Verifier</button></a>
-  </div>
-  <div class="col" style="display:flex;justify-content:center;">
-    <a href="{%url 'student_login'%}"><button type="button" class="btn btn-block btn-lg btn-outline-primary" name="button">A Student</button></a>
-  </div>
-</div>
-</div>
 </div>
   </body>
 </html>
