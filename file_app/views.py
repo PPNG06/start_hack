@@ -105,6 +105,10 @@ def student_login(request):
     else:
         return render(request,'student_login.html',)
 
+def certificate_check(request):
+    # maybe insert sth here
+    return render(request,'certificate_check.html')
+
 @login_required(login_url="/institution/login")
 def institution_logout(request):
     logout(request)
